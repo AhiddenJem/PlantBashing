@@ -11,9 +11,8 @@ esac
 echo -e "Oh no! Looks like your plant has died. Welp, nothing lives forever. Thank you for playing!"
 
 play_again="yes"
-read -p "Would you like to play again? (yes/no) " play_again
 
-while [ "$playagain" == yes ]; do
+while [ "$play_again" == "yes" ]; do
 	echo -e "Starting new game..."
 	echo -e "Welcome to the Ultimate Plant Care Simulator! You've just been hired as a garden caretaker. You'll need to pick a plant to grow and keep it healthy. But before you get to work, we need to know your name."
 	echo -e "So... what is it?"
@@ -250,4 +249,6 @@ while [ "$playagain" == yes ]; do
 	esac
 
 	echo -e "Oh no! Looks like your plant has died. Welp, nothing lives forever. Thank you for playing!"
+
+	read -p "Would you like to play again? (yes/no) " play_again
 done
