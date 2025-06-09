@@ -10,11 +10,12 @@ grow_plant() {
 	while [[ $keepAsking == "true" ]]; do
 		read -p "$1 (yes/no): " userPrompt
 		if [ $userPrompt == "yes" ] || [ $userPrompt == "y" ]; then
-			echo -e "Great!";
+			echo -e "Great!"
 			keepAsking=false
 		elif [ $userPrompt == "no" ] || [ $userPrompt == "n" ]; then
 			echo -e "Ok then, goodbye!"
 			keepAsking=false
+			exit
 		else
 			echo -e "Please enter yes/no or y/n only."
 		fi
@@ -33,7 +34,22 @@ grow_plant "Would you like to wait for your seed to grow?" "Growing..."
 #sleep 10
 
 echo -e "Oh, look! Your seed germinated overnight."
-grow_plant "Would you like to wait another day and watch it grow?" "Growing..."
+namePlant=true
+while [[ $namePlant == "true" ]]; do
+	read -p "Would you like to name your plant? (yes/no): " userPrompt
+	if [ $userPrompt == "yes" ] || [ $userPrompt == "y" ]; then
+		echo -e "Enter your plant's name."
+		read plantname
+		namePlant=false
+	elif [ $userPrompt == "no" ] || [ $userPrompt == "n" ]; then
+		plantname="Morpheus"
+		echo -e "Ok. we'll name your plant $plantname."
+		namePlant=false
+	else
+		echo -e "Please enter yes/no or y/n only."
+	fi
+done
+grow_plant "Would you like to wait another day and watch $plantname grow?" "Growing..."
 #sleep 10
 
 echo -e "Looks like nothing's happened yet."
@@ -45,7 +61,7 @@ grow_plant "Would you like to wait another day and watch your plant grow?  (yes/
 #sleep 10
 
 echo -e "Your seed has grown into a sapling."
-grow_plant "Would you like to wait another day and watch it grow?  (yes/no): " "Growing..."
+grow_plant "Would you like to wait another day and watch $plantname grow?  (yes/no): " "Growing..."
 #sleep 10
 
 echo -e "Your plant grows 2cm taller and two more leaves every day."
@@ -124,6 +140,22 @@ while [[ $playAgain == "true" ]]; do
 		echo -e "$name... That's a cool name!"
 		#sleep 3
 
+		namePlant=true
+		while [[ $namePlant == "true" ]]; do
+			read -p "Would you like to change your plant's name? (yes/no): " userPrompt
+			if [ $userPrompt == "yes" ] || [ $userPrompt == "y" ]; then
+				echo -e "Enter your plant's name."
+				read second_plantname
+				namePlant=false
+			elif [ $userPrompt == "no" ] || [ $userPrompt == "n" ]; then
+				second_plantname="Morpheus"
+				echo -e "Ok. we'll stick with $second_plantname."
+				namePlant=false
+			else
+				echo -e "Please enter yes/no or y/n only."
+			fi
+		done
+
 		grow_plant "Would you like to plant a seed?"
 
 		echo -e "You have dug a hole and planted a small seed."
@@ -135,7 +167,7 @@ while [[ $playAgain == "true" ]]; do
 		#sleep 10
 
 		echo -e "Oh, look! Your seed germinated overnight."
-		grow_plant "Would you like to wait another day and watch it grow?" "Growing..."
+		grow_plant "Would you like to wait another day and watch $second_plantname grow?" "Growing..."
 		#sleep 10
 
 		echo -e "Looks like nothing's happened yet."
@@ -147,7 +179,7 @@ while [[ $playAgain == "true" ]]; do
 		#sleep 10
 
 		echo -e "Your seed has grown into a sapling."
-		grow_plant "Would you like to wait another day and watch it grow?  (yes/no): " "Growing..."
+		grow_plant "Would you like to wait another day and watch $second_plantname grow?  (yes/no): " "Growing..."
 		#sleep 10
 
 		echo -e "Your plant grows 2cm taller and two more leaves every day."
